@@ -3,30 +3,29 @@ import { useNavigate } from "react-router-dom";
 import arrow from "../assets/arrow_icon.svg"
 
 function Ingredients() {
-  const [meal, setMeal] = useState([]); // Store meals as an array
-  const [search, setSearch] = useState(""); // New state for the search input
+  const [meal, setMeal] = useState([]); 
+  const [search, setSearch] = useState(""); 
   const navigate = useNavigate(); 
 
-  // Fetch meals when search term (category) changes
   useEffect(() => {
     if (search.trim() !== "") {
-      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${search}`)  // Use category search endpoint
+      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${search}`)  
         .then(response => response.json())
         .then(result => {
           if (result.meals) {
-            setMeal(result.meals); // Set meals if found
+            setMeal(result.meals); 
           } else {
-            setMeal([]); // Reset if no meals found
+            setMeal([]); 
           }
         });
     } else {
-      setMeal([]); // Clear meals if search is empty
+      setMeal([]); 
     }
-  }, [search]); // Depend on the search value
+  }, [search]); 
 
-  // Event handler for input change
+  
   const handleSearchChange = (e) => {
-    setSearch(e.target.value); // Update search state
+    setSearch(e.target.value); 
   };
 
   const handleMealClick = (id) => {
